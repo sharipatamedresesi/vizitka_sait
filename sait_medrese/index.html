@@ -1,0 +1,495 @@
+!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шарип-Ата медресеси</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Негизги өзгөрмөлөр (түстөрдү ушул жерден өзгөртсөңүз болот) ===== */
+:root{
+  --green:#0f3d2e; --green2:#175a44; --gold:#c9a24b;
+  --beige:#f6f1e4; --white:#fff; --text:#22302a; --line:#e3dcc6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:system-ui,Arial,sans-serif;color:var(--text);background:var(--white);line-height:1.65}
+h1,h2,h3{font-family:Lora,Georgia,serif;color:var(--green);line-height:1.25}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+.alt{background:var(--beige)}
+h2{font-size:2rem;margin-bottom:8px}
+h2::after{content:"";display:block;width:56px;height:3px;background:var(--gold);margin:10px 0 28px}
+.lead{max-width:680px}
+
+/* ===== Header ===== */
+header{position:fixed;top:0;left:0;right:0;height:64px;background:var(--green);z-index:50;border-bottom:2px solid var(--gold)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:100%}
+.logo{font-family:Lora,serif;color:#fff;font-weight:700;font-size:1.1rem}
+nav ul{display:flex;gap:4px;list-style:none}
+nav a{color:#e9efe9;font-size:.85rem;padding:8px 9px;border-radius:6px;transition:.2s}
+nav a:hover,nav a.active{color:var(--gold);background:rgba(255,255,255,.08)}
+.burger{display:none;background:none;border:0;cursor:pointer;width:32px;height:24px;flex-direction:column;justify-content:space-between}
+.burger span{height:3px;background:#fff;border-radius:2px;transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(10.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-10.5px) rotate(-45deg)}
+
+/* ===== Hero ===== */
+.hero{min-height:100vh;display:flex;align-items:center;text-align:center;color:#fff;padding-top:64px;
+  background:
+   linear-gradient(rgba(15,61,46,.88),rgba(10,40,30,.94)),
+   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 4l9 22 22 9-22 9-9 22-9-22-22-9 22-9z' fill='none' stroke='%23c9a24b' stroke-opacity='.25'/%3E%3C/svg%3E"),
+   var(--green)}
+.hero h1{color:#fff;font-size:clamp(2.2rem,6vw,4rem);animation:rise 1s ease both}
+.badge{display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:6px 18px;border-radius:30px;margin-bottom:22px;font-size:.9rem}
+.hero p{font-size:1.2rem;max-width:640px;margin:18px auto 0;animation:rise 1s .2s ease both}
+.term{color:var(--gold);font-family:Lora,serif;font-size:1.3rem;margin-top:14px;animation:rise 1s .3s ease both}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;animation:rise 1s .4s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.btn{display:inline-block;padding:13px 28px;border-radius:8px;font-weight:600;border:2px solid var(--gold);cursor:pointer;font-size:1rem;transition:.2s;font-family:inherit}
+.btn-gold{background:var(--gold);color:var(--green)}
+.btn-gold:hover{background:#dcb75f}
+.btn-line{background:transparent;color:#fff}
+.btn-line:hover{background:rgba(255,255,255,.1)}
+.btn-dark{background:var(--green);color:#fff;border-color:var(--green)}
+.btn-dark:hover{background:var(--green2)}
+
+/* ===== Карточкалар ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:10px;padding:24px}
+.card .ico{font-size:1.8rem}
+.card h3{margin:8px 0 6px;font-size:1.15rem}
+.card p{font-size:.95rem}
+.about-list{list-style:none;display:grid;gap:12px;margin-top:20px}
+.about-list li{padding-left:28px;position:relative}
+.about-list li::before{content:"✦";position:absolute;left:0;color:var(--gold)}
+
+/* ===== Документтер ===== */
+.docs{counter-reset:d}
+.docs .card{position:relative;padding-left:64px;border-top:1px solid var(--line);border-left:3px solid var(--gold)}
+.docs .card::before{counter-increment:d;content:counter(d);position:absolute;left:18px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--green);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:.9rem}
+
+/* ===== Кабыл алуу ===== */
+.facts{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0}
+.fact{background:var(--green);color:#fff;padding:14px 22px;border-radius:8px}
+.fact b{color:var(--gold)}
+
+/* ===== Accordion ===== */
+.acc-item{border:1px solid var(--line);border-radius:8px;margin-bottom:10px;background:#fff;overflow:hidden}
+.acc-btn{width:100%;text-align:left;background:none;border:0;padding:16px 20px;font:600 1rem system-ui;color:var(--green);cursor:pointer;display:flex;justify-content:space-between}
+.acc-btn::after{content:"+";color:var(--gold);font-size:1.4rem;line-height:1}
+.acc-item.open .acc-btn::after{content:"–"}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 20px}
+.acc-item.open .acc-body{padding-bottom:16px}
+
+/* ===== Күн тартиби ===== */
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:#fff}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--green);color:#fff}
+td:first-child{color:var(--green);font-weight:600;white-space:nowrap}
+
+/* ===== Hadith ===== */
+.hadith{background:var(--green);color:#fff;text-align:center;padding:64px 0}
+.hadith blockquote{font-family:Lora,serif;font-size:clamp(1.3rem,3vw,1.9rem);max-width:760px;margin:0 auto}
+.hadith cite{display:block;margin-top:16px;color:var(--gold);font-style:normal}
+
+/* ===== Дарек жана карта ===== */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.map{min-height:280px;border:2px dashed var(--gold);border-radius:10px;display:grid;place-items:center;text-align:center;padding:20px;background:#fff;color:#666}
+.map iframe{width:100%;height:100%;min-height:280px;border:0}
+
+/* ===== Форма ===== */
+form{display:grid;gap:16px}
+label{font-weight:600;font-size:.9rem;display:grid;gap:6px}
+input,select,textarea{padding:12px;border:1px solid #bdb59b;border-radius:8px;font:inherit;background:#fff}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold)}
+.err{color:#b3261e;font-size:.85rem;font-weight:400;min-height:1em}
+.bad{border-color:#b3261e}
+.ok{display:none;background:#e6f2ea;border:1px solid var(--green2);color:var(--green);padding:18px;border-radius:8px;font-weight:600;margin-top:16px}
+
+/* ===== Галерея ===== */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.gallery figure{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#fff;cursor:pointer}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .3s}
+.gallery figure:hover img{transform:scale(1.05)}
+.gallery figcaption{padding:10px 14px;font-size:.9rem;color:var(--green);font-weight:600}
+.gallery-empty{padding:28px;border:2px dashed var(--gold);border-radius:10px;text-align:center;background:#fff;color:#666}
+.gallery-empty[hidden]{display:none}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:82vh;border-radius:8px}
+.lb-btn{position:absolute;background:rgba(255,255,255,.18);color:#fff;border:0;width:48px;height:48px;border-radius:50%;font-size:1.6rem;cursor:pointer}
+.lb-btn:hover{background:rgba(255,255,255,.3)}
+.lb-close{top:20px;right:20px}
+.lb-prev{left:20px;top:50%;transform:translateY(-50%)}
+.lb-next{right:20px;top:50%;transform:translateY(-50%)}
+.lb-cap{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff}
+
+/* ===== Footer ===== */
+footer{background:var(--green);color:#dfe8e2;padding:44px 0 20px}
+footer .grid{margin-bottom:20px}
+footer h3{color:var(--gold);margin-bottom:8px;font-size:1.05rem}
+footer a{display:block;padding:2px 0}
+footer a:hover{color:var(--gold)}
+.copy{border-top:1px solid rgba(255,255,255,.15);padding-top:14px;text-align:center;font-size:.85rem}
+
+/* ===== Жогору кайтуу ===== */
+#toTop{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--green);border:0;font-size:1.3rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:40}
+#toTop.show{opacity:1;pointer-events:auto}
+
+/* ===== Scroll анимация ===== */
+.fade{opacity:0;transform:translateY(26px);transition:.7s}
+.fade.in{opacity:1;transform:none}
+
+/* ===== Мобилдик версия ===== */
+@media(max-width:960px){
+  .burger{display:flex}
+  nav{position:absolute;top:64px;left:0;right:0;background:var(--green);max-height:0;overflow:hidden;transition:max-height .35s}
+  nav.open{max-height:520px}
+  nav ul{flex-direction:column;padding:10px 20px}
+  nav a{display:block;font-size:1rem}
+  .split{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.fade{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#home" class="logo">Шарип-Ата медресеси</a>
+    <button class="burger" id="burger" aria-label="Менюну ачуу"><span></span><span></span><span></span></button>
+    <nav id="menu">
+      <ul>
+        <li><a href="#home">Башкы бет</a></li>
+        <li><a href="#about">Медресе жөнүндө</a></li>
+        <li><a href="#courses">Окуу багыттары</a></li>
+        <li><a href="#gallery-sec">Галерея</a></li>
+        <li><a href="#admission">Кабыл алуу</a></li>
+        <li><a href="#docs">Документтер</a></li>
+        <li><a href="#rules">Тартип</a></li>
+        <li><a href="#schedule">Күн тартиби</a></li>
+        <li><a href="#address">Дарек</a></li>
+        <li><a href="#contact">Байланыш</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="wrap">
+    <span class="badge">2026–2027-окуу жылы</span>
+    <h1>Шарип-Ата медресеси</h1>
+    <p>2026–2027-окуу жылы үчүн абитуриенттерди кабыл алуу жарыяланды!</p>
+    <div class="term">Окуу мөөнөтү — 2 жыл</div>
+    <div class="btns">
+      <a href="#apply" class="btn btn-gold">Каттоо башталды</a>
+      <a href="#admission" class="btn btn-line">Кабыл алуу шарттары</a>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="fade">
+  <div class="wrap">
+    <h2>Медресе жөнүндө</h2>
+    <p class="lead">Шарип-Ата медресеси Кара-Кулжа районунда жайгашкан. Медресенин негизги максаты — жаштарга диний жана адеп-ахлактык билим берүү.</p>
+    <ul class="about-list">
+      <li>Диний жана адеп-ахлактык билим берүү</li>
+      <li>Окуучуларга Куран, араб тили, фикх жана башка сабактарды үйрөтүү</li>
+      <li>Тартипке, адепке жана билимге көңүл буруу</li>
+    </ul>
+  </div>
+</section>
+
+<section id="courses" class="alt fade">
+  <div class="wrap">
+    <h2>Окуу багыттары</h2>
+    <div class="grid">
+      <div class="card"><div class="ico">📖</div><h3>Куран</h3><p>Курандын тексттерин туура окуу, жаттоо жана мазмунун түшүнүү.</p></div>
+      <div class="card"><div class="ico">🕌</div><h3>Фикх</h3><p>Ибадат жана күнүмдүк турмуштагы шарият эрежелерин үйрөнүү.</p></div>
+      <div class="card"><div class="ico">📜</div><h3>Араб тили</h3><p>Диний булактарды түшүнүү үчүн араб тилинин негиздери.</p></div>
+      <div class="card"><div class="ico">📿</div><h3>Адеп-ахлак</h3><p>Ыймандуулукка, сылык жүрүм-турумга жана жакшы мүнөзгө тарбиялоо.</p></div>
+      <div class="card"><div class="ico">🕋</div><h3>Акыйда</h3><p>Ислам динин ишениминин негиздери жөнүндө билим.</p></div>
+      <div class="card"><div class="ico">📝</div><h3>Тажвид</h3><p>Куранды тамгаларды туура айтып, эрежеси менен окуу өнөрү.</p></div>
+      <div class="card"><div class="ico">🏃</div><h3>Дене тарбия</h3><p>Ден соолукту чыңдоо жана күчтүү, чыдамдуу болууга көнүгүүлөр.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Галерея: сүрөттөр images/ папкасынан алынат ===== -->
+<section id="gallery-sec" class="fade">
+  <div class="wrap">
+    <h2>Галерея</h2>
+    <div class="gallery" id="gallery"></div>
+    <div class="gallery-empty" id="galleryEmpty" hidden>Сүрөттөр жакында кошулат</div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Жабуу">×</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Мурунку">‹</button>
+  <img id="lbImg" alt="">
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Кийинки">›</button>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<section id="admission" class="fade">
+  <div class="wrap">
+    <h2>Кабыл алуу шарттары</h2>
+    <div class="facts">
+      <div class="fact">Окуу жылы: <b>2026–2027</b></div>
+      <div class="fact">Окуу мөөнөтү: <b>2 жыл</b></div>
+    </div>
+    <p class="lead">Абитуриент төмөндөгү «Керектүү документтер» бөлүмүндөгү бардык документтерди даярдап, онлайн кайрылуу жөнөтөт. Андан кийин медресенин өкүлдөрү телефон аркылуу байланышат. Так талаптарды телефон аркылуу тактап алууну сунуштайбыз.</p>
+    <p style="margin-top:22px"><a href="#apply" class="btn btn-dark">Кайрылуу жөнөтүү</a></p>
+  </div>
+</section>
+
+<section id="docs" class="alt fade">
+  <div class="wrap">
+    <h2>Керектүү документтер</h2>
+    <div class="grid docs">
+      <div class="card">Паспорт же туулгандыгы тууралуу күбөлүктүн көчүрмөсү</div>
+      <div class="card">Мектепти бүтүргөндүгү тууралуу аттестат же күбөлүктүн көчүрмөсү</div>
+      <div class="card">Үй-бүлө тууралуу аныктама</div>
+      <div class="card">3×4 өлчөмүндөгү 6 даана сүрөт</div>
+      <div class="card">086-У тариздеги аныктама</div>
+      <div class="card">Жашаган жеринен аныктама</div>
+      <div class="card">ОМС көчүрмөсү</div>
+      <div class="card">Ата-энесинин паспорт көчүрмөсү</div>
+      <div class="card">Психиатрдан аныктама</div>
+      <div class="card">Соттолбогондугу тууралуу аныктама</div>
+      <div class="card">Мүнөздөмө</div>
+    </div>
+  </div>
+</section>
+
+<section id="rules" class="fade">
+  <div class="wrap">
+    <h2>Ички тартип эрежелери</h2>
+    <p class="lead" style="margin-bottom:20px">Эреженин атын басып, толук маалыматты ачыңыз.</p>
+    <div class="acc">
+      <div class="acc-item"><button class="acc-btn">Намаз убактысына жана диний тартипке жоопкерчилик</button><div class="acc-body"><p>Окуучу беш маал намазды убагында окуп, диний тартипти сактайт.</p></div></div>
+      <div class="acc-item"><button class="acc-btn">Сабакка өз убагында катышуу</button><div class="acc-body"><p>Сабакка кечикпей келүү милдет. Сабактан калуу себеби медресе башчылыгына маалымдалат.</p></div></div>
+      <div class="acc-item"><button class="acc-btn">Устаздарды жана башка окуучуларды урматтоо</button><div class="acc-body"><p>Устаздарга сый мамиле, курбуларга боорукердик жана сылык сүйлөшүү талап кылынат.</p></div></div>
+      <div class="acc-item"><button class="acc-btn">Медресенин мүлкүн сактоо</button><div class="acc-body"><p>Мебель, китептер жана жабдууларды сак пайдаланып, бузбоо керек.</p></div></div>
+      <div class="acc-item"><button class="acc-btn">Тазалыкты сактоо</button><div class="acc-body"><p>Класс, жатакана жана жеке тазалык сакталат. Бардык окуучулар тазалоого катышат.</p></div></div>
+      <div class="acc-item"><button class="acc-btn">Медресенин ички эрежелерин сактоо</button><div class="acc-body"><p>Ар бир окуучу медресенин бардык ички эрежелерин так аткарууга милдеттүү.</p></div></div>
+      <div class="acc-item"><button class="acc-btn">Телефон колдонуу боюнча тартип</button><div class="acc-body"><p>Сабак жана намаз убагында телефон өчүрүлөт. Телефон белгиленген убакытта гана колдонулат.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="hadith fade">
+  <div class="wrap">
+    <blockquote>«Ким илим жолуна түшсө, Алла Таала ага бейиштин жолун жеңил кылат.»</blockquote>
+    <cite>Муслим</cite>
+  </div>
+</div>
+
+<!-- Убакыттар мисал катары; ушул жерден өзгөртсө болот -->
+<section id="schedule" class="alt fade">
+  <div class="wrap">
+    <h2>Күн тартиби</h2>
+    <div class="tbl">
+      <table>
+        <tr><th>Убакыт</th><th>Иш-чара</th></tr>
+        <tr><td>05:00</td><td>Багымдат</td></tr>
+        <tr><td>06:00</td><td>Эртең мененки даярдык</td></tr>
+        <tr><td>08:00 – 12:00</td><td>Сабактар</td></tr>
+        <tr><td>10:00</td><td>Тыныгуу</td></tr>
+        <tr><td>12:30</td><td>Түшкү тамак</td></tr>
+        <tr><td>14:00 – 16:00</td><td>Түштөн кийинки сабактар</td></tr>
+        <tr><td>16:30</td><td>Спорттук иш-чаралар</td></tr>
+        <tr><td>18:00</td><td>Өз алдынча окуу</td></tr>
+        <tr><td>20:00</td><td>Куптан намазы</td></tr>
+        <tr><td>21:30</td><td>Эс алуу</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="address" class="fade">
+  <div class="wrap">
+    <h2>Дарек</h2>
+    <div class="split">
+      <div>
+        <p><b>Кара-Кулжа району, Шарип-Ата медресеси</b></p>
+        <p style="margin-top:10px">Картаны ачуу үчүн Google Maps шилтемесин төмөнкү блокко коюңуз.</p>
+      </div>
+      <!-- Google Maps коюу: <div class="map"> ичине <iframe src="ШИЛТЕМЕ"></iframe> жазыңыз -->
+      <div class="map" id="mapBox">Карта үчүн орун<br>(Google Maps шилтемеси кийин коюлат)</div>
+    </div>
+  </div>
+</section>
+
+<section id="apply" class="alt fade">
+  <div class="wrap" style="max-width:720px">
+    <h2>Онлайн кайрылуу формасы</h2>
+    <form id="form" novalidate>
+      <label>Аты-жөнү<input type="text" name="name"><span class="err"></span></label>
+      <label>Телефон номери<input type="tel" name="phone" placeholder="+996 700 000 000"><span class="err"></span></label>
+      <label>Туулган жылы<input type="number" name="year" placeholder="2008"><span class="err"></span></label>
+      <label>Жашаган жери<input type="text" name="city"><span class="err"></span></label>
+      <label>Кайсы окуу жайын бүтүргөнү<input type="text" name="school"><span class="err"></span></label>
+      <label>Кайрылуунун түрү
+        <select name="type"><option value="">Тандаңыз</option><option>Медресеге кабыл алуу</option><option>Маалымат алуу</option><option>Башка</option></select><span class="err"></span></label>
+      <label>Кошумча маалымат<textarea name="extra" rows="4"></textarea></label>
+      <button class="btn btn-dark" type="submit">Жөнөтүү</button>
+    </form>
+    <div class="ok" id="ok">Кайрылууңуз кабыл алынды</div>
+  </div>
+</section>
+
+<section id="contact" class="fade">
+  <div class="wrap">
+    <h2>Байланыш</h2>
+    <div class="grid">
+      <div class="card"><h3>Телефон</h3><p><a href="tel:+996705321232">+996 705 321 232</a><br><a href="tel:+996777290391">+996 777 290 391</a></p></div>
+      <div class="card"><h3>WhatsApp</h3><p><a href="https://wa.me/996705321232" target="_blank" rel="noopener">Жазуу</a></p></div>
+      <div class="card"><h3>Дарек</h3><p>Кара-Кулжа району, Шарип-Ата медресеси</p></div>
+      <div class="card"><h3>Иштөө убактысы</h3><p>Дүйшөмбү – Жума<br>08:00 – 17:00</p></div>
+      <div class="card"><h3>Онлайн кайрылуу</h3><p><a href="#apply" style="color:var(--green2);font-weight:600">Форманы толтуруу</a></p></div>
+    </div>
+    <div class="btns" style="justify-content:flex-start;animation:none">
+      <a class="btn btn-dark" href="https://wa.me/996705321232" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn btn-gold" href="tel:+996705321232">Чалуу</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div><h3>Шарип-Ата медресеси</h3><p>2026–2027-окуу жылы<br>Кара-Кулжа району</p></div>
+      <div><h3>Телефон</h3><a href="tel:+996705321232">+996 705 321 232</a><a href="tel:+996777290391">+996 777 290 391</a></div>
+      <div><h3>Меню</h3><a href="#about">Медресе жөнүндө</a><a href="#admission">Кабыл алуу</a><a href="#docs">Документтер</a><a href="#contact">Байланыш</a></div>
+    </div>
+    <div class="copy">© 2026 Шарип-Ата медресеси</div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Жогору кайтуу">↑</button>
+
+<script>
+// ===== Менюну ачуу жана жабуу =====
+const burger = document.getElementById('burger');
+const menu = document.getElementById('menu');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  menu.classList.toggle('open');
+});
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  burger.classList.remove('open');
+  menu.classList.remove('open');
+}));
+
+// ===== Accordion =====
+document.querySelectorAll('.acc-item').forEach(item => {
+  const body = item.querySelector('.acc-body');
+  item.querySelector('.acc-btn').addEventListener('click', () => {
+    item.classList.toggle('open');
+    body.style.maxHeight = item.classList.contains('open') ? body.scrollHeight + 'px' : 0;
+  });
+});
+
+// ===== Активдүү меню шилтемеси + "Жогору кайтуу" баскычы =====
+const links = document.querySelectorAll('nav a');
+const sections = [...links].map(a => document.querySelector(a.getAttribute('href')));
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY + 120;
+  sections.forEach((s, i) => {
+    links[i].classList.toggle('active', s.offsetTop <= y && s.offsetTop + s.offsetHeight > y);
+  });
+  toTop.classList.toggle('show', window.scrollY > 400);
+});
+toTop.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+// ===== Scroll анимация =====
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold: 0.12});
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
+
+// ===== Галерея =====
+// Сүрөттөрдү кошуу: файлды "images" папкасына салыңыз да, төмөнкү тизмеге бир сап кошуңуз.
+const PHOTOS = [
+  {src: 'images/medrese-1.jpg', title: 'Медресенин сырткы көрүнүшү'},
+  {src: 'images/medrese-2.jpg', title: 'Окуу залы'},
+  {src: 'images/medrese-3.jpg', title: 'Жатакана'},
+  {src: 'images/medrese-4.jpg', title: 'Ашкана'}
+];
+const gallery = document.getElementById('gallery');
+const galleryEmpty = document.getElementById('galleryEmpty');
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+let idx = 0;
+const figs = () => [...gallery.children];
+
+function showPhoto(i) {
+  const f = figs();
+  if (!f.length) return;
+  idx = (i + f.length) % f.length;
+  lbImg.src = f[idx].dataset.src;
+  lbCap.textContent = f[idx].dataset.title;
+}
+function closeLb() { lb.classList.remove('open'); }
+
+PHOTOS.forEach(p => {
+  const fig = document.createElement('figure');
+  fig.dataset.src = p.src;
+  fig.dataset.title = p.title;
+  const img = document.createElement('img');
+  img.src = p.src; img.alt = p.title; img.loading = 'lazy';
+  // Сүрөт файлы табылбаса, ал жашырылат
+  img.addEventListener('error', () => { fig.remove(); galleryEmpty.hidden = gallery.children.length > 0; });
+  const cap = document.createElement('figcaption');
+  cap.textContent = p.title;
+  fig.append(img, cap);
+  fig.addEventListener('click', () => { showPhoto(figs().indexOf(fig)); lb.classList.add('open'); });
+  gallery.append(fig);
+});
+
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => showPhoto(idx - 1));
+document.getElementById('lbNext').addEventListener('click', () => showPhoto(idx + 1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') showPhoto(idx - 1);
+  if (e.key === 'ArrowRight') showPhoto(idx + 1);
+});
+
+// ===== Форманы текшерүү (серверге жөнөтүлбөйт, демонстрация) =====
+const form = document.getElementById('form');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let valid = true;
+  const check = (field, message) => {
+    const err = field.parentElement.querySelector('.err');
+    field.classList.toggle('bad', !!message);
+    err.textContent = message || '';
+    if (message) valid = false;
+  };
+  const f = form.elements;
+  check(f.name, f.name.value.trim().length < 3 ? 'Аты-жөнүңүздү толук жазыңыз' : '');
+  const phone = f.phone.value.replace(/[\s-]/g, '');
+  check(f.phone, !phone ? 'Телефон номерин жазыңыз' : (!/^\+996\d{9}$/.test(phone) ? 'Туура форматта жазыңыз: +996 700 000 000' : ''));
+  const yr = Number(f.year.value);
+  check(f.year, !f.year.value ? 'Туулган жылын жазыңыз' : (yr < 1980 || yr > 2015 ? 'Туулган жыл туура эмес' : ''));
+  check(f.city, f.city.value.trim() ? '' : 'Жашаган жериңизди жазыңыз');
+  check(f.school, f.school.value.trim() ? '' : 'Окуу жайын жазыңыз');
+  check(f.type, f.type.value ? '' : 'Кайрылуунун түрүн тандаңыз');
+  const ok = document.getElementById('ok');
+  if (valid) { ok.style.display = 'block'; form.reset(); }
+  else ok.style.display = 'none';
+});
+</script>
+</body>
+</html>
